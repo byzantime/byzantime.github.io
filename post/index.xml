@@ -15,7 +15,9 @@
       <pubDate>Sat, 27 Feb 2016 00:00:00 +0000</pubDate>
       
       <guid>http://byzantime.github.io/post/2016-02-27/</guid>
-      <description>&lt;p&gt;Installing &lt;a href=&#34;http://cordova.apache.org/&#34;&gt;Cordova&lt;/a&gt; wasn&amp;rsquo;t straightforward, so I wrote up what worked for me.&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;http://byzantime.github.io/images/cordova.jpg&#34; alt=&#34;Apache Cordova header image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Installing &lt;a href=&#34;http://cordova.apache.org/&#34;&gt;Cordova&lt;/a&gt; wasn&amp;rsquo;t straightforward, so I wrote up what worked for me.&lt;/p&gt;
 
 &lt;p&gt;First &lt;a href=&#34;https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions&#34;&gt;install Nodejs&lt;/a&gt; and create a symlink because it gets installed as nodejs rather than node.&lt;/p&gt;
 
