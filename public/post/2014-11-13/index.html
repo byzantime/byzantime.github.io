@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Calling the Top</title>
+
+
+<link rel="stylesheet" href="http://byzantime.github.io//css/slim.css">
+<link rel="stylesheet" href="http://byzantime.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hugo Baldwin" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://byzantime.github.io/">Hugo Baldwin</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://byzantime.github.io/post/2014-11-13/">Calling the Top</a></h2>
+          <span class="post-date">Nov 12, 2014 </span>
+          <div class="post-content">
+            <p>Some time mid-2013 I was reading through <a href="https://bitcointalk.org/index.php?action=profile;u=68520;sa=showPosts">rpietila&rsquo;s posts</a> on the bitcointalk.org forums and came across the theory that you could &ldquo;call the top&rdquo; of a bubble simply by selling if the price doubles in 7 days.</p>
+
+<p>Unfortunately, he&rsquo;s got 4.7k-odd posts now, so the exact post has eluded me so far.</p>
+
+<p>While the old trope &ldquo;past performance doesn&rsquo;t indicate future results&rdquo; always applies, there&rsquo;s no harm in being prepared to take advantage of an identified pattern should it manifest again.</p>
+
+<p>For an example from the most recent doubling-in-7-days, see this chart of the Nov 2013 run up to Dec 31st peak, where 7-day price doublings can be seen twice:</p>
+
+<p><img src="http://bitcoincharts.com/charts/chart.png?width=940&amp;m=bitstampUSD&amp;SubmitButton=Draw&amp;r=360&amp;i=6-hour&amp;c=1&amp;s=2013-11-03&amp;e=2013-12-05&amp;Prev=&amp;Next=&amp;t=O&amp;b=&amp;a1=&amp;m1=10&amp;a2=&amp;m2=25&amp;x=0&amp;i1=&amp;i2=&amp;i3=&amp;i4=&amp;v=0&amp;cv=0&amp;ps=0&amp;l=0&amp;p=0&amp;" alt="recent 7day doubling example" />
+<a href="http://bitcoincharts.com/charts/bitstampUSD#rg360zig6-hourzczsg2013-11-03zeg2013-12-05ztgOzm1g10zm2g25">Bitcoin charts link</a></p>
+
+<p>In light of the recent upward price movement (THIS IS GENTLEMEN), the topic seemed apposite, so I whipped up a script to test the theory:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #888888; font-style: italic"># if bitcoin price on Bitstamp doubles within a 7-day timeframe, sell</span>
+
+<span style="font-weight: bold; text-decoration: underline">from</span> <span style="color: #666666; font-weight: bold; font-style: italic">datetime</span> <span style="font-weight: bold; text-decoration: underline">import</span> datetime <span style="font-weight: bold; text-decoration: underline">as</span> dt
+<span style="font-weight: bold; text-decoration: underline">from</span> <span style="color: #666666; font-weight: bold; font-style: italic">datetime</span> <span style="font-weight: bold; text-decoration: underline">import</span> timedelta
+<span style="font-weight: bold; text-decoration: underline">import</span> <span style="color: #666666; font-weight: bold; font-style: italic">hashlib</span>
+<span style="font-weight: bold; text-decoration: underline">import</span> <span style="color: #666666; font-weight: bold; font-style: italic">hmac</span>
+<span style="font-weight: bold; text-decoration: underline">import</span> <span style="color: #666666; font-weight: bold; font-style: italic">json</span>
+<span style="font-weight: bold; text-decoration: underline">from</span> <span style="color: #666666; font-weight: bold; font-style: italic">time</span> <span style="font-weight: bold; text-decoration: underline">import</span> sleep
+<span style="font-weight: bold; text-decoration: underline">import</span> <span style="color: #666666; font-weight: bold; font-style: italic">requests</span>
+
+
+URL = <span style="color: #666666; font-style: italic">&#39;https://www.bitstamp.net/api/&#39;</span>
+seven_day_history = []
+
+CLIENT_ID = 0
+API_KEY = <span style="color: #666666; font-style: italic">&#39;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#39;</span>
+API_SECRET = <span style="color: #666666; font-style: italic">&#39;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#39;</span>
+
+
+<span style="font-weight: bold; text-decoration: underline">def</span> <span style="color: #666666; font-weight: bold; font-style: italic">get_nonce</span>():
+    <span style="font-weight: bold; text-decoration: underline">return</span> <span style="font-weight: bold; font-style: italic">int</span>((dt.utcnow() - dt(1970, 1, 1)).total_seconds())
+
+
+<span style="font-weight: bold; text-decoration: underline">def</span> <span style="color: #666666; font-weight: bold; font-style: italic">make_request</span>(path=<span style="font-weight: bold; font-style: italic">None</span>, data=<span style="font-weight: bold; font-style: italic">None</span>):
+    <span style="font-weight: bold; text-decoration: underline">try</span>:
+        r = requests.post(URL+path, data)
+        r.raise_for_status()
+        <span style="font-weight: bold; text-decoration: underline">return</span> json.loads(r.text)
+    <span style="font-weight: bold; text-decoration: underline">except</span> Exception <span style="font-weight: bold; text-decoration: underline">as</span> e:
+        <span style="font-weight: bold; text-decoration: underline">print</span> e
+
+<span style="font-weight: bold; text-decoration: underline">def</span> <span style="color: #666666; font-weight: bold; font-style: italic">make_private_request</span>(path=<span style="font-weight: bold; font-style: italic">None</span>, parameters=<span style="font-weight: bold; font-style: italic">None</span>):
+    nonce = get_nonce()
+    message = <span style="color: #666666; font-style: italic">&#39;{}{}{}&#39;</span>.format(nonce, CLIENT_ID, API_KEY)
+    signature = hmac.new(
+        API_SECRET, msg=message, digestmod=hashlib.sha256).hexdigest().upper()
+
+    data = {<span style="color: #666666; font-style: italic">&#39;key&#39;</span>: API_KEY, <span style="color: #666666; font-style: italic">&#39;signature&#39;</span>: signature, <span style="color: #666666; font-style: italic">&#39;nonce&#39;</span>: nonce}
+    <span style="font-weight: bold; text-decoration: underline">if</span> parameters: data.update(parameters)
+
+    <span style="font-weight: bold; text-decoration: underline">return</span> make_request(path=path, data=data)
+
+
+<span style="font-weight: bold; text-decoration: underline">while</span> 1:
+    ticker = make_request(path=<span style="color: #666666; font-style: italic">&#39;ticker/&#39;</span>)
+    now = dt.utcnow()
+
+    <span style="color: #888888; font-style: italic"># append time stamp and price of bitcoin to list</span>
+    seven_day_history.append((now, <span style="font-weight: bold; font-style: italic">float</span>(ticker[<span style="color: #666666; font-style: italic">&#39;bid&#39;</span>])))
+
+    <span style="color: #888888; font-style: italic"># remove items older than 7 days</span>
+    <span style="font-weight: bold; text-decoration: underline">for</span> i <span style="font-weight: bold">in</span> seven_day_history:
+        <span style="font-weight: bold; text-decoration: underline">if</span> i[0] &lt; now-timedelta(days=7):
+            seven_day_history.remove(i)
+
+    d1_price = seven_day_history[0][1]
+    d7_price = seven_day_history[-1][1]
+
+    <span style="color: #888888; font-style: italic"># sell all available bitcoin if price doubled in last 7 days</span>
+    <span style="font-weight: bold; text-decoration: underline">if</span> d7_price &gt;= d1_price*2:
+
+        balance = make_private_request(path=<span style="color: #666666; font-style: italic">&#39;balance/&#39;</span>)
+        xbt_available = balance[<span style="color: #666666; font-style: italic">&#39;btc_available&#39;</span>]
+
+        <span style="color: #888888; font-style: italic"># place limit order at price of highest bid</span>
+        sell = make_private_request(path=<span style="color: #666666; font-style: italic">&#39;sell/&#39;</span>,
+                                    parameters={<span style="color: #666666; font-style: italic">&#39;amount&#39;</span>: xbt_available,
+                                                <span style="color: #666666; font-style: italic">&#39;price&#39;</span>: d7_price})
+
+        <span style="font-weight: bold; text-decoration: underline">print</span> <span style="color: #666666; font-style: italic">&#39;{}: Placed order id {} to sell {} XBT at {} each.&#39;</span>.format(
+            sell[<span style="color: #666666; font-style: italic">&#39;datetime&#39;</span>], sell[<span style="color: #666666; font-style: italic">&#39;id&#39;</span>], sell[<span style="color: #666666; font-style: italic">&#39;amount&#39;</span>], sell[<span style="color: #666666; font-style: italic">&#39;price&#39;</span>])
+
+    <span style="color: #888888; font-style: italic"># sleep for 12 hours</span>
+    sleep(43200)
+</pre></div>
+
+<a href="https://gist.github.com/byzantime/2bcacc490ec96ed483a5">View on Github</a></p>
+
+<p>To use this, you will need a funded Bitstamp account with an API key setup allowing the script to query balance and place sell orders.
+Suggested improvements would include:</p>
+
+<ul>
+<li>increasing the price checking frequency - <code>sleep(21600)</code> would give you a 6hr resolution</li>
+<li>message logging / email sending</li>
+<li>replace scheduling by running script as cron job, with celery, etc</li>
+</ul>
+
+<p>Mandatory disclaimer:
+The code is licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a> and does not claim to be fit for any purpose.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://byzantime.github.io/post/2016-02-27/"> Prev</a>  
+          <a class="btn next " href="http://byzantime.github.io/post/2014-11-12/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://byzantime.github.io//js/slim.js"></script>
+  <script src="http://byzantime.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

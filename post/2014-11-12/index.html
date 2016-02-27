@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> blogging with Pelican and Github pages</title>
+
+
+<link rel="stylesheet" href="http://byzantime.github.io//css/slim.css">
+<link rel="stylesheet" href="http://byzantime.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hugo Baldwin" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://byzantime.github.io/">Hugo Baldwin</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://byzantime.github.io/post/2014-11-12/">blogging with Pelican and Github pages</a></h2>
+          <span class="post-date">Nov 12, 2014 </span>
+          <div class="post-content">
+            <p>Hey! Welcome to my new blog.</p>
+
+<p>So, when it came to setting up a blog again, I didn&rsquo;t want to go the old route to Livejournal / Blogger / Tumblr.  Too much Y2K, Google, and teenage girl angst, respectively.
+Svbtle &amp; Ghost cost money, and Medium&rsquo;s focus is on the platform, not you.  That&rsquo;s when I remembered Github pages allows you to setup a free static site.</p>
+
+<p>First create a <a href="https://github.com/new">new Github pages repo</a> called <em>username</em>.github.io, where <em>username</em> is your Github username.
+Create a new folder locally to store the site files (I like to keep website files tidy in <code>/var/www/</code>):</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir /var/www/username.github.io
+<span style="font-weight: bold; font-style: italic">cd</span> /var/www/username.github.io
+git clone https://github.com/username/username.github.io
+</pre></div>
+
+
+<p>To save time on building a site, I first tried using <a href="http://jekyllrb.com/">Jekyll</a>, but found the instructions unclear and the setup seemed needlessly complex.  Apart from that, why is it so difficult to install anything Node related on Debian (though a friend has the same issue on Fedora, so maybe it&rsquo;s a Node thing)?</p>
+
+<p>Then I found <a href="http://blog.getpelican.com/">Pelican</a>, which allows you to write content using markdown and renders site templates into HTML using <a href="http://jinja.pocoo.org/">Jinja</a>.  It&rsquo;s also much easier to install and get running!</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>pip install pelican
+</pre></div>
+
+
+<p>Site content goes in a <code>content/</code> folder inside the pelican install directory, and individual pages start with simple metadata:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>Title: My super title
+Date: 2010-12-03 10:20
+Modified: 2010-12-05 19:30
+Category: Python
+Tags: pelican, publishing
+Slug: my-super-post
+Authors: Alexis Metaireau, Conan Doyle
+Summary: Short version for index and feeds
+
+This is the content of my super blog post.
+</pre></div>
+
+
+<p>To preview the site locally, run a Python web server, then check <a href="http://localhost:8000">localhost:8000</a>:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="font-weight: bold; font-style: italic">cd</span> output
+python -m SimpleHTTPServer
+</pre></div>
+</p>
+
+<p>To publish your content live, back in the main site directory run the following commands:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>pelican
+<span style="font-weight: bold; font-style: italic">cd</span> output
+git add --all
+git commit -m <span style="color: #666666; font-style: italic">&quot;my first commit&quot;</span>
+git push
+</pre></div>
+</p>
+
+<p>Of course, there&rsquo;s lots of other things you can do, like changing or customising the default theme.  <a href="http://docs.getpelican.com/en/3.5.0/">Read the docs here</a> (wish more projects used <a href="https://readthedocs.org/">read the docs</a>!</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://byzantime.github.io/post/2014-11-13/"> Prev</a>  
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://byzantime.github.io//js/slim.js"></script>
+  <script src="http://byzantime.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>
