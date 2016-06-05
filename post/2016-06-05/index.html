@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> How to create many-to-many relationships with associated properties in SQLAlchemy</title>
+
+
+<link rel="stylesheet" href="http://byzantime.github.io//css/slim.css">
+<link rel="stylesheet" href="http://byzantime.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hugo Baldwin" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://byzantime.github.io/">Hugo Baldwin</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://byzantime.github.io/post/2016-06-05/">How to create many-to-many relationships with associated properties in SQLAlchemy</a></h2>
+          <span class="post-date">Jun 5, 2016 </span>
+          <div class="post-content">
+            <p>I once had a scenario where one business could be managed by multiple users, and each user could manage multiple businesses.  To further complicate matters, only one user could be the Administrator of a business, which should ideally also be represented by the relationship.</p>
+
+<p>Finding out how to represent that relationship was tricky as I couldn&rsquo;t find it in the SQLAlchemy docs, and StackOverflow was a mixed bag.  This is what I pieced together:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="font-weight: bold; text-decoration: underline">from</span> <span style="color: #666666; font-weight: bold; font-style: italic">datetime</span> <span style="font-weight: bold; text-decoration: underline">import</span> datetime <span style="font-weight: bold; text-decoration: underline">as</span> dt
+<span style="font-weight: bold; text-decoration: underline">from</span> <span style="color: #666666; font-weight: bold; font-style: italic">app</span> <span style="font-weight: bold; text-decoration: underline">import</span> db
+<span style="font-weight: bold; text-decoration: underline">from</span> <span style="color: #666666; font-weight: bold; font-style: italic">sqlalchemy</span> <span style="font-weight: bold; text-decoration: underline">import</span> Table, Column, Boolean, DateTime, Integer, \
+    SmallInteger, String, ForeignKey
+<span style="font-weight: bold; text-decoration: underline">from</span> <span style="color: #666666; font-weight: bold; font-style: italic">sqlalchemy.orm</span> <span style="font-weight: bold; text-decoration: underline">import</span> relationship
+<span style="font-weight: bold; text-decoration: underline">from</span> <span style="color: #666666; font-weight: bold; font-style: italic">app</span> <span style="font-weight: bold; text-decoration: underline">import</span> constants
+
+
+<span style="color: #888888; font-style: italic"># Establish many-to-many relationship between users and (business) businesses</span>
+<span style="font-weight: bold; text-decoration: underline">class</span> <span style="color: #666666; font-weight: bold; font-style: italic">UserBusiness</span>(db.Model):
+    __tablename__ = <span style="color: #666666; font-style: italic">&#39;userbusiness&#39;</span>
+    user_id       = Column(Integer, ForeignKey(<span style="color: #666666; font-style: italic">&#39;users.id&#39;</span>), primary_key=<span style="font-weight: bold; font-style: italic">True</span>)
+    business_id   = Column(Integer, ForeignKey(<span style="color: #666666; font-style: italic">&#39;businesses.id&#39;</span>),
+                           primary_key=<span style="font-weight: bold; font-style: italic">True</span>)
+    administrator = Column(Boolean, default=<span style="font-weight: bold; font-style: italic">False</span>)
+    business      = relationship(<span style="color: #666666; font-style: italic">&#39;Business&#39;</span>, backref=<span style="color: #666666; font-style: italic">&#39;users&#39;</span>)
+    user          = relationship(<span style="color: #666666; font-style: italic">&#39;User&#39;</span>, backref=<span style="color: #666666; font-style: italic">&#39;businesses&#39;</span>)
+
+
+<span style="font-weight: bold; text-decoration: underline">class</span> <span style="color: #666666; font-weight: bold; font-style: italic">User</span>(db.Model):
+    __tablename__ = <span style="color: #666666; font-style: italic">&#39;users&#39;</span>
+    <span style="font-weight: bold; font-style: italic">id</span>            = Column(Integer, primary_key=<span style="font-weight: bold; font-style: italic">True</span>)
+    email         = Column(String(256), unique=<span style="font-weight: bold; font-style: italic">True</span>)
+    name          = Column(String(128))
+    password      = Column(String(256))
+    last_auth     = Column(DateTime, default=dt.utcnow)
+    status        = Column(SmallInteger, default=constants.NEW)
+    <span style="color: #888888; font-style: italic"># timestamps</span>
+    update_date   = Column(DateTime, default=dt.utcnow, onupdate=dt.utcnow)
+    insert_date   = Column(DateTime, default=dt.utcnow)
+
+    <span style="font-weight: bold; text-decoration: underline">def</span> <span style="color: #666666; font-weight: bold; font-style: italic">__init__</span>(<span style="font-weight: bold; font-style: italic">self</span>, email=<span style="font-weight: bold; font-style: italic">None</span>, name=<span style="font-weight: bold; font-style: italic">None</span>, password=<span style="font-weight: bold; font-style: italic">None</span>):
+        <span style="font-weight: bold; font-style: italic">self</span>.email = email
+        <span style="font-weight: bold; font-style: italic">self</span>.name = name
+        <span style="font-weight: bold; font-style: italic">self</span>.password = password
+
+
+<span style="font-weight: bold; text-decoration: underline">class</span> <span style="color: #666666; font-weight: bold; font-style: italic">Business</span>(db.Model):
+    __tablename__ = <span style="color: #666666; font-style: italic">&#39;businesses&#39;</span>
+    <span style="font-weight: bold; font-style: italic">id</span>            = Column(Integer, primary_key=<span style="font-weight: bold; font-style: italic">True</span>)
+    name          = Column(String(256))
+    status        = Column(SmallInteger, default=constants.NEW)
+    <span style="color: #888888; font-style: italic"># timestamps</span>
+    update_date   = Column(DateTime, default=dt.utcnow, onupdate=dt.utcnow)
+    insert_date   = Column(DateTime, default=dt.utcnow)
+
+    <span style="font-weight: bold; text-decoration: underline">def</span> <span style="color: #666666; font-weight: bold; font-style: italic">__init__</span>(<span style="font-weight: bold; font-style: italic">self</span>, name=<span style="font-weight: bold; font-style: italic">None</span>):
+        <span style="font-weight: bold; font-style: italic">self</span>.name = name
+</pre></div>
+
+
+<p>In a Flask application, this would be contained your <code>models.py</code> file.
+Python&rsquo;s <code>__repr()__</code> and other common functions omitted for clarity.</p>
+
+<p>To record a new User-Business relationship, first create the UserBusiness relationship, then add in the User and Business objects (if this were Flask, this&rsquo;d likely be in <code>views.py</code>):</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>ub = UserBusiness(user=g.user, administrator=<span style="font-weight: bold; font-style: italic">True</span>)
+ub.business = Business(name=<span style="color: #666666; font-style: italic">&#39;Acme Widgets Ltd&#39;</span>)
+db.session.add(ub)
+db.session.commit()
+</pre></div>
+</p>
+
+<p>To get a list of Businesses a user manages, you can do something like the following:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>businesses = [ub.business <span style="font-weight: bold; text-decoration: underline">for</span> ub <span style="font-weight: bold">in</span> g.user.businesses]
+</pre></div>
+</p>
+
+<p><code>ub</code> here represents the UserBusiness relation.  You could then extend it to only get businesses which the user is an administrator of:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>businesses = [ub.business <span style="font-weight: bold; text-decoration: underline">for</span> ub <span style="font-weight: bold">in</span> g.user.businesses <span style="font-weight: bold; text-decoration: underline">if</span> ub.administrator]
+</pre></div>
+</p>
+
+<p>It&rsquo;s all beautifully simple once you&rsquo;ve done it successfully once or twice&hellip;</p>
+
+          </div>
+        </div>
+        <div class="pagination"> 
+          <a class="btn next " href="http://byzantime.github.io/post/2016-05-29/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://byzantime.github.io//js/slim.js"></script>
+  <script src="http://byzantime.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

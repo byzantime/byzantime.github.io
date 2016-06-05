@@ -6,8 +6,97 @@
     <description>Recent content in Posts on Hugo Baldwin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-GB</language>
-    <lastBuildDate>Sun, 29 May 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jun 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://byzantime.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to create many-to-many relationships with associated properties in SQLAlchemy</title>
+      <link>http://byzantime.github.io/post/2016-06-05/</link>
+      <pubDate>Sun, 05 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://byzantime.github.io/post/2016-06-05/</guid>
+      <description>&lt;p&gt;I once had a scenario where one business could be managed by multiple users, and each user could manage multiple businesses.  To further complicate matters, only one user could be the Administrator of a business, which should ideally also be represented by the relationship.&lt;/p&gt;
+
+&lt;p&gt;Finding out how to represent that relationship was tricky as I couldn&amp;rsquo;t find it in the SQLAlchemy docs, and StackOverflow was a mixed bag.  This is what I pieced together:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;datetime&lt;/span&gt; &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;import&lt;/span&gt; datetime &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;as&lt;/span&gt; dt
+&lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;app&lt;/span&gt; &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;import&lt;/span&gt; db
+&lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;sqlalchemy&lt;/span&gt; &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;import&lt;/span&gt; Table, Column, Boolean, DateTime, Integer, \
+    SmallInteger, String, ForeignKey
+&lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;sqlalchemy.orm&lt;/span&gt; &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;import&lt;/span&gt; relationship
+&lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;app&lt;/span&gt; &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;import&lt;/span&gt; constants
+
+
+&lt;span style=&#34;color: #888888; font-style: italic&#34;&gt;# Establish many-to-many relationship between users and (business) businesses&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;UserBusiness&lt;/span&gt;(db.Model):
+    __tablename__ = &lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;userbusiness&amp;#39;&lt;/span&gt;
+    user_id       = Column(Integer, ForeignKey(&lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;users.id&amp;#39;&lt;/span&gt;), primary_key=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;True&lt;/span&gt;)
+    business_id   = Column(Integer, ForeignKey(&lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;businesses.id&amp;#39;&lt;/span&gt;),
+                           primary_key=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;True&lt;/span&gt;)
+    administrator = Column(Boolean, default=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;False&lt;/span&gt;)
+    business      = relationship(&lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;Business&amp;#39;&lt;/span&gt;, backref=&lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;users&amp;#39;&lt;/span&gt;)
+    user          = relationship(&lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;User&amp;#39;&lt;/span&gt;, backref=&lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;businesses&amp;#39;&lt;/span&gt;)
+
+
+&lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;User&lt;/span&gt;(db.Model):
+    __tablename__ = &lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;users&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;id&lt;/span&gt;            = Column(Integer, primary_key=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;True&lt;/span&gt;)
+    email         = Column(String(256), unique=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;True&lt;/span&gt;)
+    name          = Column(String(128))
+    password      = Column(String(256))
+    last_auth     = Column(DateTime, default=dt.utcnow)
+    status        = Column(SmallInteger, default=constants.NEW)
+    &lt;span style=&#34;color: #888888; font-style: italic&#34;&gt;# timestamps&lt;/span&gt;
+    update_date   = Column(DateTime, default=dt.utcnow, onupdate=dt.utcnow)
+    insert_date   = Column(DateTime, default=dt.utcnow)
+
+    &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;__init__&lt;/span&gt;(&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;self&lt;/span&gt;, email=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;None&lt;/span&gt;, name=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;None&lt;/span&gt;, password=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;None&lt;/span&gt;):
+        &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;self&lt;/span&gt;.email = email
+        &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;self&lt;/span&gt;.name = name
+        &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;self&lt;/span&gt;.password = password
+
+
+&lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;Business&lt;/span&gt;(db.Model):
+    __tablename__ = &lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;businesses&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;id&lt;/span&gt;            = Column(Integer, primary_key=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;True&lt;/span&gt;)
+    name          = Column(String(256))
+    status        = Column(SmallInteger, default=constants.NEW)
+    &lt;span style=&#34;color: #888888; font-style: italic&#34;&gt;# timestamps&lt;/span&gt;
+    update_date   = Column(DateTime, default=dt.utcnow, onupdate=dt.utcnow)
+    insert_date   = Column(DateTime, default=dt.utcnow)
+
+    &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;__init__&lt;/span&gt;(&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;self&lt;/span&gt;, name=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;None&lt;/span&gt;):
+        &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;self&lt;/span&gt;.name = name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In a Flask application, this would be contained your &lt;code&gt;models.py&lt;/code&gt; file.
+Python&amp;rsquo;s &lt;code&gt;__repr()__&lt;/code&gt; and other common functions omitted for clarity.&lt;/p&gt;
+
+&lt;p&gt;To record a new User-Business relationship, first create the UserBusiness relationship, then add in the User and Business objects (if this were Flask, this&amp;rsquo;d likely be in &lt;code&gt;views.py&lt;/code&gt;):&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;ub = UserBusiness(user=g.user, administrator=&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;True&lt;/span&gt;)
+ub.business = Business(name=&lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;#39;Acme Widgets Ltd&amp;#39;&lt;/span&gt;)
+db.session.add(ub)
+db.session.commit()
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;To get a list of Businesses a user manages, you can do something like the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses]
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ub&lt;/code&gt; here represents the UserBusiness relation.  You could then extend it to only get businesses which the user is an administrator of:&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;if&lt;/span&gt; ub.administrator]
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s all beautifully simple once you&amp;rsquo;ve done it successfully once or twice&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>What&#39;s your capacity to hustle?</title>
