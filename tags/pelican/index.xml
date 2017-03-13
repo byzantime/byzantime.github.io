@@ -2,11 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pelican on Hugo Baldwin</title>
-    <link>http://byzantime.github.io/tags/pelican/</link>
+    <link>http://byzantime.github.io/tags/pelican/index.xml</link>
     <description>Recent content in Pelican on Hugo Baldwin</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-GB</language>
-    <lastBuildDate>Wed, 12 Nov 2014 21:40:00 +0000</lastBuildDate>
+    <language>en-gb</language>
     <atom:link href="http://byzantime.github.io/tags/pelican/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -54,20 +53,20 @@ This is the content of my super blog post.
 
 &lt;p&gt;To preview the site locally, run a Python web server, then check &lt;a href=&#34;http://localhost:8000&#34;&gt;localhost:8000&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;cd&lt;/span&gt; output
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;cd&lt;/span&gt; output
 python -m SimpleHTTPServer
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;To publish your content live, back in the main site directory run the following commands:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pelican
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pelican
 &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;cd&lt;/span&gt; output
 git add --all
 git commit -m &lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;quot;my first commit&amp;quot;&lt;/span&gt;
 git push
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;Of course, there&amp;rsquo;s lots of other things you can do, like changing or customising the default theme.  &lt;a href=&#34;http://docs.getpelican.com/en/3.5.0/&#34;&gt;Read the docs here&lt;/a&gt; (wish more projects used &lt;a href=&#34;https://readthedocs.org/&#34;&gt;read the docs&lt;/a&gt;!&lt;/p&gt;
 </description>

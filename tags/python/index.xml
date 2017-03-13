@@ -2,11 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Hugo Baldwin</title>
-    <link>http://byzantime.github.io/tags/python/</link>
+    <link>http://byzantime.github.io/tags/python/index.xml</link>
     <description>Recent content in Python on Hugo Baldwin</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-GB</language>
-    <lastBuildDate>Sun, 05 Jun 2016 00:00:00 +0000</lastBuildDate>
+    <language>en-gb</language>
     <atom:link href="http://byzantime.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -84,15 +83,15 @@ db.session.commit()
 
 &lt;p&gt;To get a list of Businesses a user manages, you can do something like the following:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses]
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses]
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;&lt;code&gt;ub&lt;/code&gt; here represents the UserBusiness relation.  You could then extend it to only get businesses which the user is an administrator of:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;if&lt;/span&gt; ub.administrator]
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;if&lt;/span&gt; ub.administrator]
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;It&amp;rsquo;s all beautifully simple once you&amp;rsquo;ve done it successfully once or twice&amp;hellip;&lt;/p&gt;
 </description>

@@ -1,73 +1,124 @@
 <!DOCTYPE html>
-<html lang="en-GB">
-
+<html lang="en-gb">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title> Hello World</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hello World</title>
+    
+    <meta name="author" content="Hugo Baldwin">
+    <link rel="stylesheet" href="http://byzantime.github.io/css/style.css">
+    <link href="http://byzantime.github.io/tags/hello-world/index.xml" rel="feed" type="application/rss+xml" title="Hugo Baldwin">
+    <meta name="generator" content="Hugo 0.19" />
+    
+        <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-15220597-2', 'auto');
+	ga('send', 'pageview');
+</script>
 
-
-<link rel="stylesheet" href="http://byzantime.github.io//css/slim.css">
-<link rel="stylesheet" href="http://byzantime.github.io//css/highlight.min.css">
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="/favicon.ico">
-
-
-<link href="http://byzantime.github.io/tags/hello-world/index.xml" rel="alternate" type="application/rss+xml" title="Hugo Baldwin" />
-
+    
 </head>
-
 <body>
-  <div class="container">
-    <div class="header">
-  <h1 class="site-title"><a href="http://byzantime.github.io/">Hugo Baldwin</a></h1>
-  <p class="site-tagline"></p>
-  <div class="nav">
-    <a class="nav-btn" href="#">
-      <span class="ci ci-burger"></span>
-    </a>
-    <ul class="nav-list">
-       
-	  <li class="spacer">&ac;</li>
-  
-    </ul>
-  </div>
-</div>
-    <div class="content">
-      <div class="posts">
-         
-        <div class="post">
-          <h2 class="post-title"><a href="http://byzantime.github.io/post/2014-11-12/">blogging with Pelican and Github pages</a></h2>
-          <span class="post-date">Nov 12, 2014</span>
-		  
-			<span class="post-tags">
-		  	
-			          #<a href="/tags/pelican">pelican</a>&nbsp;
-		  	
-			          #<a href="/tags/hello-world">hello world</a>&nbsp;
-		  	
-			          #<a href="/tags/github">github</a>&nbsp;
-		  	
-		    </span>
-		  
-		  
-        </div>
-        
-      </div>
-      <div class="pagination">
-   
-</div>
-    </div>
-    <div class="footer">
-  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
-</div>
+    <header>
+        <h1 class="logo">
+            <a href="http://byzantime.github.io/">Hugo Baldwin</a>
+        </h1>
+        <nav>
+            <ul>
+                
+            </ul>
+        </nav>
+    </header>
+	<main>
+		
+		
+				<article>
+		<h1><a href="http://byzantime.github.io/post/2016-06-05/">How to create many-to-many relationships with associated properties in SQLAlchemy</a></h1>
+		<time>Jun 6, 2016</time>
+		<div>
+			I once had a scenario where one business could be managed by multiple users, and each user could manage multiple businesses. To further complicate matters, only one user could be the Administrator of a business, which should ideally also be represented by the relationship.
+Finding out how to represent that relationship was tricky as I couldn&rsquo;t find it in the SQLAlchemy docs, and StackOverflow was a mixed bag. This is what I pieced together:
+			
+				<a href="http://byzantime.github.io/post/2016-06-05/" class="continue">&#9758;</a>
+			
+		</div>
+	</article>
+		
+				<article>
+		<h1><a href="http://byzantime.github.io/post/2016-05-29/">What&#39;s your capacity to hustle?</a></h1>
+		<time>May 5, 2016</time>
+		<div>
+			This gem turned up in the Ribbonfarm post Stone-Soup for the Capitalist’s Soul:
+ Your rights to your wealth do not extend beyond your understanding of it. You are fair game for hustlers who understand your wealth better than you do. The role of the state is to limit the violence with which you can be hustled. If you are poor you have the right to hustle the rich within certain limits.
+			
+				<a href="http://byzantime.github.io/post/2016-05-29/" class="continue">&#9758;</a>
+			
+		</div>
+	</article>
+		
+				<article>
+		<h1><a href="http://byzantime.github.io/post/2016-02-27/">Installing Apache Cordova on BunsenLabs Linux</a></h1>
+		<time>Feb 2, 2016</time>
+		<div>
+			Installing Cordova wasn&rsquo;t straightforward, so I wrote up what worked for me.
+First follow the instructions here to install Nodejs and create a symlink because it gets installed as nodejs rather than node.
+sudo ln -s /usr/bin/nodejs /usr/bin/node  NPM is thankfully in the debian repos:
+sudo apt-get install npm sudo apt-get install -y build-essential  Install Cordova using NPM and create your first project:
+sudo npm install -g cordova cordova create MyProject cd MyProject platform add browser platform add android  The cordova run browser command requires google-chrome so I installed chromium then symlinked google-chrome to it (you can skip this step if you use Chrome):
+			
+				<a href="http://byzantime.github.io/post/2016-02-27/" class="continue">&#9758;</a>
+			
+		</div>
+	</article>
+		
+				<article>
+		<h1><a href="http://byzantime.github.io/post/2014-11-13/">Calling the Top</a></h1>
+		<time>Nov 11, 2014</time>
+		<div>
+			Some time mid-2013 I was reading through rpietila&rsquo;s posts on the bitcointalk.org forums and came across the theory that you could &ldquo;call the top&rdquo; of a bubble simply by selling if the price doubles in 7 days.
+Unfortunately, he&rsquo;s got 4.7k-odd posts now, so the exact post has eluded me so far.
+While the old trope &ldquo;past performance doesn&rsquo;t indicate future results&rdquo; always applies, there&rsquo;s no harm in being prepared to take advantage of an identified pattern should it manifest again.
+			
+				<a href="http://byzantime.github.io/post/2014-11-13/" class="continue">&#9758;</a>
+			
+		</div>
+	</article>
+		
+				<article>
+		<h1><a href="http://byzantime.github.io/post/2014-11-12/">blogging with Pelican and Github pages</a></h1>
+		<time>Nov 11, 2014</time>
+		<div>
+			Hey! Welcome to my new blog.
+So, when it came to setting up a blog again, I didn&rsquo;t want to go the old route to Livejournal / Blogger / Tumblr. Too much Y2K, Google, and teenage girl angst, respectively. Svbtle &amp; Ghost cost money, and Medium&rsquo;s focus is on the platform, not you. That&rsquo;s when I remembered Github pages allows you to setup a free static site.
+First create a new Github pages repo called username.
+			
+				<a href="http://byzantime.github.io/post/2014-11-12/" class="continue">&#9758;</a>
+			
+		</div>
+	</article>
+		
+				<article>
+		<h1><a href="http://byzantime.github.io/post/">Posts</a></h1>
+		<time>Jun 6, 2016</time>
+		<div>
+			
+			
+		</div>
+	</article>
+		
+		<div>
 
-  </div>
-  <script src="http://byzantime.github.io/js/slim.js"></script>
-  
+1 of 1
 
+</div>
+	</main>
+
+    <footer>
+        <p>&copy; 2017 <a href="http://byzantime.github.io/">Hugo Baldwin</a>.&nbsp;&nbsp;Markup generated by the other <a href="https://gohugo.io/">Hugo</a>.</p>
+    </footer>
 </body>
-
 </html>

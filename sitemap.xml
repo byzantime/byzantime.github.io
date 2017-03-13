@@ -2,12 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://byzantime.github.io/</loc>
-    <lastmod>2016-06-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://byzantime.github.io/post/2016-06-05/</loc>
     <lastmod>2016-06-05T00:00:00+00:00</lastmod>
   </url>
@@ -30,6 +24,113 @@
   <url>
     <loc>http://byzantime.github.io/post/2014-11-12/</loc>
     <lastmod>2014-11-12T21:40:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/android/</loc>
+    <lastmod>2016-02-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/bitcoin/</loc>
+    <lastmod>2014-11-12T22:41:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/cordova/</loc>
+    <lastmod>2016-02-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/database/</loc>
+    <lastmod>2016-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/github/</loc>
+    <lastmod>2014-11-12T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/hello-world/</loc>
+    <lastmod>2014-11-12T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/</loc>
+    <lastmod>2016-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/hustling/</loc>
+    <lastmod>2016-05-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/linux/</loc>
+    <lastmod>2016-02-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/pelican/</loc>
+    <lastmod>2014-11-12T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/post/</loc>
+    <lastmod>2016-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/python/</loc>
+    <lastmod>2016-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/requests/</loc>
+    <lastmod>2014-11-12T22:41:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/ribbonfarm/</loc>
+    <lastmod>2016-05-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/sqlalchemy/</loc>
+    <lastmod>2016-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/trading/</loc>
+    <lastmod>2014-11-12T22:41:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://byzantime.github.io/tags/venkatesh/</loc>
+    <lastmod>2016-05-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

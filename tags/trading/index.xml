@@ -2,11 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Trading on Hugo Baldwin</title>
-    <link>http://byzantime.github.io/tags/trading/</link>
+    <link>http://byzantime.github.io/tags/trading/index.xml</link>
     <description>Recent content in Trading on Hugo Baldwin</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-GB</language>
-    <lastBuildDate>Wed, 12 Nov 2014 22:41:00 +0000</lastBuildDate>
+    <language>en-gb</language>
     <atom:link href="http://byzantime.github.io/tags/trading/index.xml" rel="self" type="application/rss+xml" />
     
     <item>

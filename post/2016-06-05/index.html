@@ -1,47 +1,44 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-gb">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title> How to create many-to-many relationships with associated properties in SQLAlchemy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>How to create many-to-many relationships with associated properties in SQLAlchemy</title>
+    
+    <meta name="author" content="Hugo Baldwin">
+    <link rel="stylesheet" href="http://byzantime.github.io/css/style.css">
+    
+    <meta name="generator" content="Hugo 0.19" />
+    
+        <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-15220597-2', 'auto');
+	ga('send', 'pageview');
+</script>
 
-
-<link rel="stylesheet" href="http://byzantime.github.io//css/slim.css">
-<link rel="stylesheet" href="http://byzantime.github.io//css/highlight.min.css">
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="/favicon.ico">
-
-
-<link href="" rel="alternate" type="application/rss+xml" title="Hugo Baldwin" />
-
+    
 </head>
-
 <body>
-  <div class="container">
-    <div class="header">
-  <h1 class="site-title"><a href="http://byzantime.github.io/">Hugo Baldwin</a></h1>
-  <p class="site-tagline"></p>
-  <div class="nav">
-    <a class="nav-btn" href="#">
-      <span class="ci ci-burger"></span>
-    </a>
-    <ul class="nav-list">
-       
-	  <li class="spacer">&ac;</li>
-  
-    </ul>
-  </div>
-</div>
-    <div class="content">
-      <div class="posts">
-        <div class="post">
-          <h2 class="post-title"><a href="http://byzantime.github.io/post/2016-06-05/">How to create many-to-many relationships with associated properties in SQLAlchemy</a></h2>
-          <span class="post-date">Jun 5, 2016 </span>
-          <div class="post-content">
-            <p>I once had a scenario where one business could be managed by multiple users, and each user could manage multiple businesses.  To further complicate matters, only one user could be the Administrator of a business, which should ideally also be represented by the relationship.</p>
+    <header>
+        <h1 class="logo">
+            <a href="http://byzantime.github.io/">Hugo Baldwin</a>
+        </h1>
+        <nav>
+            <ul>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h1>How to create many-to-many relationships with associated properties in SQLAlchemy</h1>
+            <time>Jun 6, 2016</time>
+            <div>
+                <p>I once had a scenario where one business could be managed by multiple users, and each user could manage multiple businesses.  To further complicate matters, only one user could be the Administrator of a business, which should ideally also be represented by the relationship.</p>
 
 <p>Finding out how to represent that relationship was tricky as I couldn&rsquo;t find it in the SQLAlchemy docs, and StackOverflow was a mixed bag.  This is what I pieced together:</p>
 
@@ -110,37 +107,38 @@ db.session.commit()
 
 <p>To get a list of Businesses a user manages, you can do something like the following:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>businesses = [ub.business <span style="font-weight: bold; text-decoration: underline">for</span> ub <span style="font-weight: bold">in</span> g.user.businesses]
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>businesses = [ub.business <span style="font-weight: bold; text-decoration: underline">for</span> ub <span style="font-weight: bold">in</span> g.user.businesses]
 </pre></div>
-</p>
+
 
 <p><code>ub</code> here represents the UserBusiness relation.  You could then extend it to only get businesses which the user is an administrator of:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>businesses = [ub.business <span style="font-weight: bold; text-decoration: underline">for</span> ub <span style="font-weight: bold">in</span> g.user.businesses <span style="font-weight: bold; text-decoration: underline">if</span> ub.administrator]
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>businesses = [ub.business <span style="font-weight: bold; text-decoration: underline">for</span> ub <span style="font-weight: bold">in</span> g.user.businesses <span style="font-weight: bold; text-decoration: underline">if</span> ub.administrator]
 </pre></div>
-</p>
+
 
 <p>It&rsquo;s all beautifully simple once you&rsquo;ve done it successfully once or twice&hellip;</p>
 
-          </div>
-        </div>
-        <div class="pagination"> 
-          <a class="btn next " href="http://byzantime.github.io/post/2016-05-29/"> Next</a> 
-        </div>
-      </div>
-    </div>
-    
-    <div class="footer">
-  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
-</div>
+            </div>
+            <div>
+                <ul id="tags">
+                    
+                    <li><a href="/tags/sqlalchemy">SQLAlchemy</a> </li>
+                    
+                    <li><a href="/tags/python">Python</a> </li>
+                    
+                    <li><a href="/tags/database">database</a> </li>
+                    
+                </ul>
+            </div>
+            <div>
+                
+            </div>
+        </article>
+    </main>
 
-  </div>
-  <script src="http://byzantime.github.io//js/slim.js"></script>
-  <script src="http://byzantime.github.io//js/highlight.min.js"></script>
-  <script>
-    hljs.initHighlightingOnLoad();
-  </script>
-  
+    <footer>
+        <p>&copy; 2017 <a href="http://byzantime.github.io/">Hugo Baldwin</a>.&nbsp;&nbsp;Markup generated by the other <a href="https://gohugo.io/">Hugo</a>.</p>
+    </footer>
 </body>
-
 </html>

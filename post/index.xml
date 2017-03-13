@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Hugo Baldwin</title>
-    <link>http://byzantime.github.io/post/</link>
+    <link>http://byzantime.github.io/post/index.xml</link>
     <description>Recent content in Posts on Hugo Baldwin</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-GB</language>
+    <language>en-gb</language>
     <lastBuildDate>Sun, 05 Jun 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://byzantime.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -84,15 +84,15 @@ db.session.commit()
 
 &lt;p&gt;To get a list of Businesses a user manages, you can do something like the following:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses]
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses]
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;&lt;code&gt;ub&lt;/code&gt; here represents the UserBusiness relation.  You could then extend it to only get businesses which the user is an administrator of:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;if&lt;/span&gt; ub.administrator]
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;businesses = [ub.business &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;for&lt;/span&gt; ub &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; g.user.businesses &lt;span style=&#34;font-weight: bold; text-decoration: underline&#34;&gt;if&lt;/span&gt; ub.administrator]
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;It&amp;rsquo;s all beautifully simple once you&amp;rsquo;ve done it successfully once or twice&amp;hellip;&lt;/p&gt;
 </description>
@@ -133,11 +133,9 @@ db.session.commit()
 
 &lt;p&gt;Installing &lt;a href=&#34;http://cordova.apache.org/&#34;&gt;Cordova&lt;/a&gt; wasn&amp;rsquo;t straightforward, so I wrote up what worked for me.&lt;/p&gt;
 
-&lt;p&gt;First &lt;a href=&#34;https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions&#34;&gt;install Nodejs&lt;/a&gt; and create a symlink because it gets installed as nodejs rather than node.&lt;/p&gt;
+&lt;p&gt;First follow the instructions here to &lt;a href=&#34;https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions&#34;&gt;install Nodejs&lt;/a&gt; and create a symlink because it gets installed as nodejs rather than node.&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo ln -s /usr/bin/nodejs /usr/bin/node
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo ln -s /usr/bin/nodejs /usr/bin/node
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -183,20 +181,20 @@ cordova run browser
 
 &lt;p&gt;Now try and build your new app:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cordova build
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cordova build
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;If you get an error about being unable to run &lt;code&gt;java -version&lt;/code&gt;, you may need to install the JDK and add the JAVA_HOME environment variable:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install default-jdk
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install default-jdk
 &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color: #666666; font-weight: bold; font-style: italic&#34;&gt;JAVA_HOME&lt;/span&gt;=/path/to/jvm/
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;If you get the following error:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;:CordovaLib:processDebugResources FAILED
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;:CordovaLib:processDebugResources FAILED
 
 FAILURE: Build failed with an exception.
 
@@ -214,20 +212,20 @@ ERROR building one of the platforms: Error code 1 for command: /home/windlab/pro
 You may not have the required environment or OS to build this project
 Error: Error code 1 for command: /home/windlab/projects/AlarmClock/platforms/android/gradlew with args: cdvBuildDebug,-b,/home/windlab/projects/AlarmClock/platforms/android/build.gradle,-Dorg.gradle.daemon=true,-Pandroid.useDeprecatedNdk=true
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;It&amp;rsquo;s because you&amp;rsquo;re trying to run a 32bit file on 64bit system.  &lt;a href=&#34;http://stackoverflow.com/a/27734148&#34;&gt;Thanks Abdelraman Elkady&lt;/a&gt;!&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install lib32stdc++6
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install lib32stdc++6
 sudo apt-get install lib32z1
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;Finally, run the following command to display your new app in the Android emulator (if you haven&amp;rsquo;t created one already the error surprisingly gives useful instructions):&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cordova emulate android
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cordova emulate android
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 </description>
     </item>
     
@@ -387,20 +385,20 @@ This is the content of my super blog post.
 
 &lt;p&gt;To preview the site locally, run a Python web server, then check &lt;a href=&#34;http://localhost:8000&#34;&gt;localhost:8000&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;cd&lt;/span&gt; output
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;cd&lt;/span&gt; output
 python -m SimpleHTTPServer
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;To publish your content live, back in the main site directory run the following commands:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pelican
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pelican
 &lt;span style=&#34;font-weight: bold; font-style: italic&#34;&gt;cd&lt;/span&gt; output
 git add --all
 git commit -m &lt;span style=&#34;color: #666666; font-style: italic&#34;&gt;&amp;quot;my first commit&amp;quot;&lt;/span&gt;
 git push
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;Of course, there&amp;rsquo;s lots of other things you can do, like changing or customising the default theme.  &lt;a href=&#34;http://docs.getpelican.com/en/3.5.0/&#34;&gt;Read the docs here&lt;/a&gt; (wish more projects used &lt;a href=&#34;https://readthedocs.org/&#34;&gt;read the docs&lt;/a&gt;!&lt;/p&gt;
 </description>

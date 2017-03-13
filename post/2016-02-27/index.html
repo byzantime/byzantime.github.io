@@ -1,55 +1,50 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-gb">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title> Installing Apache Cordova on BunsenLabs Linux</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Installing Apache Cordova on BunsenLabs Linux</title>
+    
+    <meta name="author" content="Hugo Baldwin">
+    <link rel="stylesheet" href="http://byzantime.github.io/css/style.css">
+    
+    <meta name="generator" content="Hugo 0.19" />
+    
+        <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-15220597-2', 'auto');
+	ga('send', 'pageview');
+</script>
 
-
-<link rel="stylesheet" href="http://byzantime.github.io//css/slim.css">
-<link rel="stylesheet" href="http://byzantime.github.io//css/highlight.min.css">
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="/favicon.ico">
-
-
-<link href="" rel="alternate" type="application/rss+xml" title="Hugo Baldwin" />
-
+    
 </head>
-
 <body>
-  <div class="container">
-    <div class="header">
-  <h1 class="site-title"><a href="http://byzantime.github.io/">Hugo Baldwin</a></h1>
-  <p class="site-tagline"></p>
-  <div class="nav">
-    <a class="nav-btn" href="#">
-      <span class="ci ci-burger"></span>
-    </a>
-    <ul class="nav-list">
-       
-	  <li class="spacer">&ac;</li>
-  
-    </ul>
-  </div>
-</div>
-    <div class="content">
-      <div class="posts">
-        <div class="post">
-          <h2 class="post-title"><a href="http://byzantime.github.io/post/2016-02-27/">Installing Apache Cordova on BunsenLabs Linux</a></h2>
-          <span class="post-date">Feb 27, 2016 </span>
-          <div class="post-content">
-            <p><img src="/images/cordova.jpg" alt="Apache Cordova header image" /></p>
+    <header>
+        <h1 class="logo">
+            <a href="http://byzantime.github.io/">Hugo Baldwin</a>
+        </h1>
+        <nav>
+            <ul>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h1>Installing Apache Cordova on BunsenLabs Linux</h1>
+            <time>Feb 2, 2016</time>
+            <div>
+                <p><img src="/images/cordova.jpg" alt="Apache Cordova header image" /></p>
 
 <p>Installing <a href="http://cordova.apache.org/">Cordova</a> wasn&rsquo;t straightforward, so I wrote up what worked for me.</p>
 
-<p>First <a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions">install Nodejs</a> and create a symlink because it gets installed as nodejs rather than node.</p>
+<p>First follow the instructions here to <a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions">install Nodejs</a> and create a symlink because it gets installed as nodejs rather than node.</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo ln -s /usr/bin/nodejs /usr/bin/node
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo ln -s /usr/bin/nodejs /usr/bin/node
 </pre></div>
 
 
@@ -95,20 +90,20 @@ cordova run browser
 
 <p>Now try and build your new app:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>cordova build
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>cordova build
 </pre></div>
-</p>
+
 
 <p>If you get an error about being unable to run <code>java -version</code>, you may need to install the JDK and add the JAVA_HOME environment variable:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo apt-get install default-jdk
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo apt-get install default-jdk
 <span style="font-weight: bold; font-style: italic">export</span> <span style="color: #666666; font-weight: bold; font-style: italic">JAVA_HOME</span>=/path/to/jvm/
 </pre></div>
-</p>
+
 
 <p>If you get the following error:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>:CordovaLib:processDebugResources FAILED
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>:CordovaLib:processDebugResources FAILED
 
 FAILURE: Build failed with an exception.
 
@@ -126,41 +121,41 @@ ERROR building one of the platforms: Error code 1 for command: /home/windlab/pro
 You may not have the required environment or OS to build this project
 Error: Error code 1 for command: /home/windlab/projects/AlarmClock/platforms/android/gradlew with args: cdvBuildDebug,-b,/home/windlab/projects/AlarmClock/platforms/android/build.gradle,-Dorg.gradle.daemon=true,-Pandroid.useDeprecatedNdk=true
 </pre></div>
-</p>
+
 
 <p>It&rsquo;s because you&rsquo;re trying to run a 32bit file on 64bit system.  <a href="http://stackoverflow.com/a/27734148">Thanks Abdelraman Elkady</a>!</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo apt-get install lib32stdc++6
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo apt-get install lib32stdc++6
 sudo apt-get install lib32z1
 </pre></div>
-</p>
+
 
 <p>Finally, run the following command to display your new app in the Android emulator (if you haven&rsquo;t created one already the error surprisingly gives useful instructions):</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>cordova emulate android
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>cordova emulate android
 </pre></div>
-</p>
 
-          </div>
-        </div>
-        <div class="pagination">
-          <a class="btn previous " href="http://byzantime.github.io/post/2016-05-29/"> Prev</a>  
-          <a class="btn next " href="http://byzantime.github.io/post/2014-11-13/"> Next</a> 
-        </div>
-      </div>
-    </div>
-    
-    <div class="footer">
-  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
-</div>
 
-  </div>
-  <script src="http://byzantime.github.io//js/slim.js"></script>
-  <script src="http://byzantime.github.io//js/highlight.min.js"></script>
-  <script>
-    hljs.initHighlightingOnLoad();
-  </script>
-  
+            </div>
+            <div>
+                <ul id="tags">
+                    
+                    <li><a href="/tags/linux">linux</a> </li>
+                    
+                    <li><a href="/tags/cordova">cordova</a> </li>
+                    
+                    <li><a href="/tags/android">android</a> </li>
+                    
+                </ul>
+            </div>
+            <div>
+                
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2017 <a href="http://byzantime.github.io/">Hugo Baldwin</a>.&nbsp;&nbsp;Markup generated by the other <a href="https://gohugo.io/">Hugo</a>.</p>
+    </footer>
 </body>
-
 </html>
