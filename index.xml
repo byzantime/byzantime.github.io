@@ -6,8 +6,32 @@
     <description>Recent content on Hugo Baldwin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 05 Jun 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Mar 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://byzantime.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>New project: CourseMonger.com</title>
+      <link>http://byzantime.github.io/post/2017-03-14/</link>
+      <pubDate>Mon, 13 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://byzantime.github.io/post/2017-03-14/</guid>
+      <description>&lt;p&gt;So! I have a new project underway, &lt;a href=&#34;http://www.coursemonger.com/&#34;&gt;CourseMonger.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Unlike many solutions, this one started with a problem.  My partner teaches parenting courses, each comprised of multiple workshops.  Each workshop can be at a different price and vary in number of places available.  Any prospective system would also need to provide a reservation system whereby a place is reserved for say, 8 minutes while a student completes her booking.&lt;/p&gt;
+
+&lt;p&gt;Eventbrite provides registration-locking, but the Eventbrite model is based on &lt;em&gt;events&lt;/em&gt;, many people at a specific location and time at perhaps a few different pricepoints (tickets).  Like a concert or sports event.  It lacks the ability to setup multiple classes per event or have per-class availability &amp;amp; pricing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://byzantime.github.io/images/coursemonger_landing_page.png&#34; alt=&#34;CourseMonger.com&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Wouldn&amp;rsquo;t it be nice if there was something designed specifically for the needs of small classes?  For parenting workshops, yoga classes, dance practice, martial arts training, etc?&lt;/p&gt;
+
+&lt;p&gt;CourseMonger allows you to create courses comprised of multiple classes.  Each class can have its own title and optional description, spaces available, price and start and finish times.&lt;/p&gt;
+
+&lt;p&gt;Once created, your course can be distributed to students as a single course registration page listing all the classes you run.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.coursemonger.com/&#34;&gt;Give it a try!&lt;/a&gt;  Email me directly with suggested features or bugs using &lt;a href=&#34;mailto:support@coursemonger.com&#34;&gt;support@coursemonger.com&lt;/a&gt;, I&amp;rsquo;d love to hear from you.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How to create many-to-many relationships with associated properties in SQLAlchemy</title>
